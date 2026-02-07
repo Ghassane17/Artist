@@ -1,0 +1,96 @@
+# IDE & Editor Files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+*.sublime-project
+*.sublime-workspace
+
+# Environment Variables
+.env
+.env.local
+.env.*.local
+
+# OS Files
+.DS_Store
+.AppleDouble
+.LSOverride
+*.sw?
+*~
+
+# Build Artifacts & Dependencies
+**/node_modules/
+**/target/
+**/build/
+**/.gradle/
+**/dist/
+**/.expo/
+**/web-build/
+
+# Java/Maven
+**/*.class
+**/*.jar
+**/*.war
+**/HELP.md
+**/.mvn/wrapper/maven-wrapper.jar
+**/.classpath
+**/.factorypath
+**/.project
+**/.settings
+**/.springBeans
+**/.sts4-cache
+**/.apt_generated
+
+# IDE Specific
+**/*.iml
+**/.iws
+**/.ipr
+**/nbproject/private/
+**/nbbuild/
+**/dist/
+**/nbdist/
+**/.nb-gradle/
+
+# Debug Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+*.log
+
+# TypeScript
+*.tsbuildinfo
+
+# Mobile & Native
+.kotlin/
+*.orig.*
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+/ios/
+/android/
+
+# React Native / Expo
+.metro-health-check*
+
+# Large Media Files (Optional - uncomment if needed)
+# Assets/**/*.mp4
+# Assets/**/*.mov
+# Assets/**/*.zip
+# Assets/**/*.tar.gz
+
+# Temporary Files
+.tmp/
+temp/
+*.temp
+
+# Platform Specific
+.gradle/
+local.properties
+
+# Docker
+docker-compose.override.yml
