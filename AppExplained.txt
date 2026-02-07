@@ -1,0 +1,100 @@
+﻿Core Project Definition
+A mobile application for artists to share work and create interactive AI-enhanced courses. Primary differentiator is the integrated AI-driven learning system.
+Essential Features (MVP)
+1.  User authentication (artist role designation).
+2.  Profile with portfolio (image/video upload).
+3.  Social feed of followed artists' work.
+4.  24-hour ephemeral stories.
+5.  Direct messaging between users.
+6.  Course creation system with AI-generated ideas for creativity .
+
+
+Technology Stack (Local/Free)
+*   Frontend: React Native (Expo or Bare).
+*   Backend: Spring Boot (Java 21).
+*   Database: PostgreSQL with pgvector (Docker).
+*   File Storage: MinIO (S3-compatible, Docker).
+*   Cache/WebSocket: Redis (Docker).
+*   AI: Ollama (local LLM, Docker).
+*   Orchestration: Docker Compose.
+
+
+Development Sequence
+
+
+Week 1: Setup
+1.  Install Docker Desktop, Java 21, Node.js, Git.
+2.  Create two GitHub repositories: `artapp-backend`, ‘artapp-frontend`.
+3.  Backend: Generate Spring Boot project from [start.spring.io](https://start.spring.io) with: Web, Data JPA, PostgreSQL, Security dependencies.
+4.  Frontend: Create React Native project: `npx react-native init ArtApp`.
+5.  Create `docker-compose.yml` with PostgreSQL, Redis, MinIO, Ollama containers.
+
+
+Week 2-3: Backend Core
+Task A (Authentication & Users):
+    *   Define `User` entity (id, email, passwordHash, artistRole, etc.).
+    *   Implement JWT-based registration/login (`/api/auth/register`, `/api/auth/login`).
+    *   Secure all other API endpoints.
+Task B (Media & Stories):
+    *   Define `Artwork` entity (id, title, mediaUrls, userId).
+    *   Define `Story` entity (id, mediaUrl, userId, expiresAt).
+    *   Implement MinIO service for file upload/download.
+    *   Create scheduled job to delete expired stories.
+Task C (Messaging):
+    *   Define `Message` and `Conversation` entities.
+    *   Configure WebSocket broker (`/ws` endpoint).
+    *   Create a controller to handle real-time message routing.
+Task D (Courses & AI):
+    *   Define `Course`, `Module`, `ContentItem` entities.
+    *   Create a service that calls Ollama API (`http://localhost:11434/api/generate`) to generate quiz questions based on course content.
+    *   Store generated quizzes as JSON in the database.
+
+
+Week 3-4: Frontend Core
+Task 1 (Auth & Navigation):
+    *   Create Login and Register screens.
+    *   Implement navigation stack (e.g., React Navigation).
+    *   Store JWT token securely (AsyncStorage).
+Task 2 (Feed & Stories):
+    *   Build main Feed screen displaying artworks.
+    *   Implement horizontal stories bar at top.
+    *   Create artwork upload screen with image picker.
+Task 3 (Messaging):
+    *   Build a chat interface.
+    *   Connect to WebSocket endpoint (`ws://10.0.2.2:8080/ws` for Android emulator).
+    *   Handle sending/receiving messages in real-time.
+Task 4 (Courses):
+    *   Build course listing and course player screens.
+    *   Implement video playback for course modules.
+    *   Render AI-generated quiz components.
+
+
+Week 5: Integration
+1.  Connect each frontend screen to its corresponding backend API.
+2.  Test full user flow: register → login → upload artwork → view feed → send message → view course.
+3.  Fix connection issues between React Native and local Spring Boot server (use `10.0.2.2` for Android, network configuration for iOS).
+
+
+Critical Simplifications for Start
+*   Use Spring Boot's automatic database schema generation (`ddl-auto=update`).
+*   Store file URLs as strings; let MinIO handle storage.
+*   For AI, use a fixed prompt with Ollama's default model. Example: "Generate 3 multiple choice questions about digital painting fundamentals."
+*   Implement basic WebSocket messaging without persistence initially.
+*   Use React Native's built-in state management (useState, useContext) before adding libraries.
+
+
+First Action Today
+1.  Install Docker Desktop.
+2.  Run `docker-compose up` with the provided configuration.
+3.  Verify PostgreSQL is accessible on `localhost:5432`.
+4.  Create the Spring Boot project skeleton and push to GitHub.
+
+
+
+
+
+
+* Spring Boot needs PostgreSQL for data
+* Spring Boot needs Redis for caching/sessions
+* Spring Boot needs MinIO for file storage
+* Spring Boot needs Ollama for AI features
